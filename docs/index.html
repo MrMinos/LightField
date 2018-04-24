@@ -14,9 +14,9 @@
     <div class="col-sm-8">
       <center>
 
-      <h1>Project Proposal: Render M.E.</h1>
+			<h1>Light Field Camera</h1>
+			<h2>A Project Update and Pivot</h2>
 
-      <p><strong>M</strong>y <strong>E</strong>nvironment</p>
       <br>
 
   			<h4>Minos Park</h4>
@@ -25,77 +25,115 @@
       		<h6>3032315274</h6>
       </center>
 
+	  <br>
+	  <img src="img/neuron2.png" style="width:50%">
+	  <img src="img/neuron.jpg" style="width:49%">
+	  Raw light field images of neurons
+	
 
       <hr>
-      <h3>Purpose</h3>
-      <p>This simulation can aid in product advertisement or realtor business, to help the potential buyers to look and even estimate the feel of home/product, more accurately in their desired settings. One static example is IKEA and their catalog. We want to build an interactive simulator that users could control and experience themselves.
-	</p>
-	<br>
-	<br>
-      <h3>Goals and Deliverables</h3>
-      <h4>What we <em>want</em> to deliver</h4>
-      <p>We want to generate an interactive simulation of a residential home where users can modify the furnitures, including the placement of lighting, in a home. We believe we can accomplish this goal because there are existing libraries that we can use to achieve our goal</p>
+      <h3>Abstract</h3>
+    	<p>
+				Capturing 4D light field with plenoptic camera allows computational refocusing, computational correction of lens aberrations and more.
+				In this project we wanted to extend Project 3-2 to implement the ability to refocus after the ray tracing is done, by having each pixel be a grid recording radiance from different directions.
+				<br><br>
+				Before pivoting, our proposal was a scene simulator. The proposal can be found <a href="previous.html">here</a>.
+			</p><br><hr>
+			<h3>Details on Pivot and Project's New Direction</h3>
+			Slides and video can be found <a href="https://docs.google.com/presentation/d/1KLvgjfg_O6laAJSA4XTLX452eL6mwj9Mg8nc-Qy6_mo/edit?usp=sharing">here</a>.
+			<br>
+			<h4>Why Pivot?</h4>
+			The feedback we got from initial proposal was helpful in reckoning a few overlooked holes. Megan gave an outlook that the project seems "lack of moderate technical challenges."
+			After the feedback was released, we discussed ways to better communicate in the proposal of our initial ideas in-depth to show the technical challenges.
+			<br><br>
+			After a few more discussion, we ultimately decided that it would be better if we pivot completely and work on ideas that were shown on the course website. Since by doing that, we can offload our worries about clarifying the depth of technical challenges and focus on making progress in the project, which by then we were running out of.
+			<br><br>
+			<em>Hence, this document serves as both our proposal and progress update.</em>
+			<br><br>
+			<h4>New Direction of The Project</h4> 
+			<h5>- Abstract</h5>Please refer to the abstract above.
+			<br>
+			<h5>- Background</h5>
+			The current ray tracer uses pin-hole or thin lens model which once the ray tracing is done, loses the ability to change the focus plane and cannot do after-the-fact change of aperture. The rendered scene is essentially a printed photo.
+			If we implement a new type of lens called microlens on the previous model, which closely follows the Lytro camera model, then we can obtain pixels containing more data than the previous model. In turn, we can also implement a computational refocusing mechanism to get images that have different focus after the ray tracing is done.
+			<br><br>
+			We begin our project by extending Project 3-2 a thin-lens ray tracer. We will use the light field lens introduced in lecture as the model to implement in our camera.
+			<br><h5>- Relevant papers/articles</h5>
+			<ul>
+				<li><a href="http://graphics.stanford.edu/papers/lfmicroscope/">Light Field Microscopy</a><br></li>
+				<li><a href="http://graphics.stanford.edu/papers/lfmicroscope/levoy-lfmicroscope-sig06.pdf">- Paper: Light Field Microscopy</a><br></li>
+				<li>- The above Light Field Microscopy webpage links to many other related resources.<br></li>
+				<li><a href="https://graphics.stanford.edu/papers/lfcamera/lfcamera-150dpi.pdf">Light Field Photography with a Hand-held Plenoptic Camera</a><br></li>
+				<li><a href="http://lightfield.stanford.edu/lfs.html">The (New) Stanford Light Field Archive</a><br><br></li>
+			</ul>
+			<h5>- Goals and Deliverables/Tasks</h5>
+			<ul>
+				While discussing how to approach the project, Professor Ng mentioned that we should try to do multiple "parts" that are all related to a topic -- in this case, light field. That would truly enable us to explore the subject in various ways.
+				So each approach layed out here is less seqencial, dependent on each other and more a full project on its own. The expectation is that we will get at least one approach well completed and the rest of the approaches are excercises for our expansion of experience and satisfying the curiosity for the subject.
+				
+				<br><br>
+				
+				<li>First Approach -- LF data generation by the ray tracer from Project 3-2 with addition of a Lytro camera like microlens that was covered in the class</li>
+				
+				<ul>
+					<li>Implementing microlens</li>
+					<ul>
+						<li>Last offering of this course had a project implementing a set of camera lens in our ray tracer system. Confer that project for how to implement microlens</li>
+						<li>Have more details on the resolution of the microlens</li>
+						<li>Check the rays progressing through the microlens, against what is expected.</li>
+						<li>Save a screenshot of rays going through the microlens</li>
+						<li>Confirm we get the somewhat expected raw data that is similar to the paper</li>
+					</ul>
+					<li>Computational refocusing mechanism</li>
+					To use the gathered LF data, we can now work on the mechanism to enable refocusing and more
+					<ul>
+						<li>Start with something simple. As in lecture's example, try selecting just same (u,v) pixel from each data points and see how it does</li>
+						<li>Following the paper listed above, implement the ability to choose the focus plane</li>
+						<li>(optional, do this while exploring the second approach)<br>Make an interactive application that will take in the raw LF data and show various images.</li>
+					</ul>
+				</ul>
 
-      <p>We want to create something like this(link) example, where a prospective tenant can check and see how their home will look like with their desired settings.</p>
+				<br>
 
-      <h4>What we <em>hope</em> to deliver</h4>
-      <p>We would like to take this simulator and have some sort of characters with physics engine. This will allow users to engage with the scene more interactively and gain realistic experiences. For example, users can host a party in their home see </p>
+				<li>Second Approach -- Use real world LF data and create a viewer that interactively shows the user various perspective of a captured image. </li>
+				<ul>
+					<li>The data is captured by arrays of DSLRs and u,v location of the camera is saved as metadata. We can use this to produce LF refocused image.</li>
+					<li>Make a simulator that accepts LF images and produces interactive demo</li>
+					<ul>
+						<li>Similar tasks as the first approach's Computational refocusing mechanism</li>
+						<li>- Start with something simple. As in lecture's example, try selecting just same (u,v) pixel from each data points and see how it does</li>
+						<li>- Following the paper listed above, implement the ability to choose the focus plane</li>
+					</ul>
+				</ul>
+			</ul>
+			<h5>- Hope to deliver: stretched goal</h5>
+			<ul>
+				<li>We scheduled quite a lot for a single project. Although we hope to deliver all, it is likely that we may only finish one of the approaches laid out in the previous section</li>
+			</ul>
+			<br><hr>
+			<h4>Prelim result and reflection on plan</h4>
+			Initially the first approach was taken and yet the microlens implementation is proven to be hard. Unfortunately, the amount of work necessary to make such progress was not met. There is not much to exhibit because the product so far does not work. Naturally, there was more revision of the project.
+			<br>Second approach will be taken during the final phase of the project. We will focus on implementing the computational refocusing mechanism and test the mechanism with the LF data available at Stanford Light Field Archive. As mentioned in the revised deliverable/tasks section, we plan to do what Professor Ng suggested.
+			
 
-      <h4>Quality / Performance Measurements</h4>
-      <p>We will measure the quality of our system by having individuals use our application and we will ask them about their experience and if it meets their expectations. Moreover, we will include a quantitative measurement to determine the user experience</p>
 
-      <br>
-      <br>
-      <h3>Planned Timeline #goals</h3>
-      <table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">Week</th>
-		      <th scope="col">Task</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">1st Week</th>
-		      <td>Conceptual reading</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2nd Week</th>
-		      <td>Task distribution</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3rd Week</th>
-		      <td>Debugging/Improvements</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">4th Week</th>
-		      <td>User experience research with final version</td>
-		    </tr>
-		  </tbody>
-		</table>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
+		</div>
+		<br>
+		<br>
 
 		<br>
 		<br>
-		<h3>Resources</h3>
-		<ul>
-			<li>Unity Engine (v5 ultimate or latest free-version)</li>
-			<li><a href="https://docs.unity3d.com/Manual/index.html">Unity Documentation</a></li>
-			<li><a href="http://springmansion.com/#3d-tour-video">Soderby's Virtual Tour of Spring Mansion example</a></li>
-			<li><a href="https://www.ikea.com/ms/en_US/img/homepage/banners/fy18_hpb_wk13_fsi_godmorgon.jpg">IKEA product catalogue</a></li>
-			<li><a href="https://blogs.unity3d.com/2015/11/10/bedroom-demo-archviz-with-ssrr/">Example from Unity3D demo team</a></li>
-			<li><a href="http://www.cgsociety.org/index.php/CGSFeatures/CGSFeatureSpecial/building_3d_with_ikea">Background information on IKEA's switch to 3D rendering</a></li>
-		</ul>
 
+		<br>
+		<br>
 
-
-
-
-
-
-
-
-
-    </div>
     <div class="col-sm-2">
       
     </div>
